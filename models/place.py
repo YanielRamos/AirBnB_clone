@@ -4,6 +4,8 @@ from models.base_model import BaseModel, Base
 from sqlalchemy import Column, String, Integer, Float, ForeignKey
 from sqlalchemy.orm import relationship
 from os import getenv
+import models
+from models import review
 
 
 class Place(BaseModel, Base):
@@ -40,7 +42,7 @@ class Place(BaseModel, Base):
         def reviews(self):
             """Getter"""
             review_list = []
-            all_reviews = models.storage.all(Review)
+            all_reviews = models.storage.all(review)
             for rev in all_reviews.value():
                 if rev.place_id == self.id:
                     review_list.append(rev)
